@@ -1,0 +1,70 @@
+
+<section class="h-100 h-custom" >
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card rounded-3">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Add New User</h3>
+  
+              <form class="px-md-2" #userForm="ngForm" (ngSubmit)="onsubmit(userForm)">
+  
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example2q" name="name" #name="ngModel" class="form-control"
+                  [class.is-invalid]="name.invalid && name.touched"
+                  [(ngModel)]="userData.name"
+                  minlength="4"
+                  maxlength="16"
+                  required
+                  />
+                  <label class="form-label" for="form3Example2q">Name</label>
+                  <div *ngIf="name.invalid && name.touched" class="text-center text-danger">
+                    <p *ngIf="name.errors?.['required']">Enter a name</p>
+                    <p *ngIf="name.errors?.['minlength']">Name should be atlest 4 characters</p>
+                </div>
+                </div>
+                <div class="form-outline mb-4">
+                    <input type="text" id="form3Example1q" name="email" class="form-control"  required
+                    [class.is-invalid]="email.invalid && email.touched"
+                    [(ngModel)]="userData.email"
+                    #email="ngModel" 
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                    />
+                    <label class="form-label" for="form3Example1q">Email</label>
+                    <div *ngIf="email.invalid && email.touched" class="text-center text-danger">
+                        <p *ngIf="email.errors?.['required']">Enter email</p>
+                        <p *ngIf="email.errors?.['pattern']">Enter a valid email</p>
+                    </div>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form3Example3q" name="password" class="form-control"
+                    [class.is-invalid]="password.invalid && password.touched"
+                    #password="ngModel" minlength="8" maxlength="16"
+                    [(ngModel)]="userData.password"  required
+                    />
+                    <label class="form-label" for="form3Example3q">password</label>
+                    <div *ngIf="password.invalid && password.touched" class="text-center text-danger">
+                        <p *ngIf="password.errors?.['required']">Enter password</p>
+                        <p *ngIf="password.errors?.['minlength']">Password Should be atleast 8 characters</p>
+                    </div>
+                  </div>
+                  <div *ngIf="serverSuccess$ | async" class="text-center text-success">
+                    <p> User added Successfully </p>
+                  </div>
+                  <div *ngIf="(serverError$ | async) as serverError"class="text-center text-danger">
+                    <p>{{serverError}} </p>
+                  </div>
+                  <div *ngIf="validationError" class="text-center text-danger">
+                    <p>{{validationError}} </p>
+                  </div>
+
+                <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+  
+              </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

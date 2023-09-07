@@ -1,0 +1,35 @@
+<section class="vh-100" >
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <h2 class="text-center text-dark ">  Admin  </h2>
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" >
+            <div class="card-body p-5 text-center">
+  
+              <h3 class="mb-5 text-primary">Edit your fields</h3>
+            <form [formGroup]="userForm"  (ngSubmit)="onSubmit()" >  
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="typeEmailX-2">Email</label>
+                  <input type="email" id="typeEmailX-2" formControlName="email"  class="form-control form-control-lg" required/>
+                </div>
+    
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="name-2">Name </label>
+                  <input type="text" id="name-2" formControlName="fullName" class="form-control form-control-lg" required />
+                </div>
+                <!-- <div *ngIf="userForm.get('name').hasError('required')" class="error-message">
+                  Name is required.
+                </div> -->
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+            </form>
+            <div *ngIf="editUserSuccess$|async" class="text-center text-success">
+              <p>Edited user successfully</p>
+            </div>
+              <hr class="my-4">
+  
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

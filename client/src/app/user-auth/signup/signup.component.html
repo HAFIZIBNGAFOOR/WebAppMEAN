@@ -1,0 +1,79 @@
+<section class="vh-100 bg-image image-added">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" >
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <form  #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)" enctype="multipart/form-data" >
+                <div class="form-outline mb-4">
+                  <input type="text" id="name" name="name" #name="ngModel" 
+                  [class.is-invalid]="name.invalid && name.touched" class="form-control form-control-lg"
+                    [(ngModel)]="user.name" required 
+                    minlength="4"
+                    maxlength="20"
+                    pattern="[a-zA-Z\s]*"/>
+                  <label class="form-label" for="name">Your Name</label>
+                  <div *ngIf="name.invalid && name.touched" class="text-danger">
+                    <p>Enter a valid Name </p>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input type="email" id="form3Example3cg" name="email" #email="ngModel"
+                   [class.is-invalid]="email.invalid && email.touched" class="form-control form-control-lg"
+                    [(ngModel)]="user.email" required 
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"/>
+                  <label class="form-label" for="form3Example3cg">Your Email</label>
+                  <div *ngIf="email.invalid && email.touched" class="text-danger">
+                    <p>Enter a valid Email </p>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <input type="file" id="form3Example4cdg" accept="image/*" name="image" #image="ngModel"
+                     [class.is-invalid]="image.invalid && image.touched" class="form-control form-control-lg"
+                      (change)="onImageChange($event)"  [(ngModel)]="user.selectedFile" required/>
+                    <label class="form-label" for="form3Example4cdg">Image</label>
+                    <div *ngIf="image.invalid && image.touched" class="text-danger">
+                      <p>Select an image </p>
+                    </div>
+                  </div>
+
+                <div class="form-outline mb-4">
+                  <input type="password" id="form3Example4cg" name="password" #password="ngModel"
+                   [class.is-invalid]="password.invalid && password.touched" class="form-control form-control-lg"
+                   [(ngModel)]="user.password" required minlength="8" maxlength="16" pattern=""/>
+                  <label class="form-label" for="form3Example4cg">Password</label>
+                  <div *ngIf="password.invalid && password.touched" class="text-danger">
+                    <div *ngIf="password.errors?.['required']">Password is required.</div>
+                    <p *ngIf="password.errors?.['minlength']">Enter a valid password </p>
+                  </div>
+                </div>
+                <div *ngIf="validationError" class="text-danger d-flex justify-content-center">
+                  <p >{{validationError}} </p>
+                </div>
+                <div *ngIf="errorMessage " class="text-danger d-flex justify-content-center">
+                  <p >{{ errorMessage }} </p>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button type="submit"
+                    class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                </div>
+                <div *ngIf="signupSuccess " class="text-success d-flex justify-content-center">
+                  <p> Signup Successfull . </p>
+                </div>
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <a routerLink="/login"
+                    class="fw-bold text-body"><u>Login here</u></a></p>
+
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

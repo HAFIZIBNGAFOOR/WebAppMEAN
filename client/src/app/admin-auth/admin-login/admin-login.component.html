@@ -1,0 +1,54 @@
+<section class="vh-100" >
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <h2 class="text-center text-dark ">Angular Admin</h2>
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card shadow-2-strong" >
+            <div class="card-body p-5 text-center">
+  
+              <h3 class="mb-5">Sign in</h3>
+            <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" >  
+                <div class="form-outline mb-4">
+                    <input type="email" id="typeEmailX-2" name="email" class="form-control form-control-lg"
+                    [class.is-invalid]="email.invalid && email.touched"
+                    #email="ngModel"  [(ngModel)]="adminData.email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required/>
+                    <label class="form-label" for="typeEmailX-2">Email</label>
+                    <div class="text-center text-danger" *ngIf="email.invalid && email.touched">
+                        <p>Enter a valid Email</p>
+                    </div>
+                </div>
+    
+                <div class="form-outline mb-4">
+                    <input type="password" id="typePasswordX-2" name="password" #password="ngModel"
+                    [(ngModel)]="adminData.password" class="form-control form-control-lg" minlength="8" maxlength="16" required />
+                    <label class="form-label" for="typePasswordX-2">Password</label>
+                    <div *ngIf="password.invalid && password.touched" class="text-center text-danger">
+                        <p *ngIf="password.errors?.['required']">Enter a valid Password</p>
+                        <p *ngIf="password.errors?.['minlength']">Password should be atleast 8 characters</p>
+                    </div>
+                </div>
+                <div class="text-danger" *ngIf="validationError">
+                    <p>{{validationError}}</p>
+                  </div>
+                  <!-- <div class="text-danger" *ngIf="(serverError$ | async) as !serverError ">
+                    <p>{{serverError}}</p>
+                  </div> -->
+                  <div class="text-danger" *ngIf="(serverError$ | async) as serverError ">
+                    <p>{{serverError}}</p>
+                  </div>
+                <!-- Checkbox -->
+                <!-- <div class="form-check d-flex justify-content-start mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+                    <label class="form-check-label" for="form1Example3"> Remember password </label>
+                </div> -->
+    
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+            </form>
+              <hr class="my-4">
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

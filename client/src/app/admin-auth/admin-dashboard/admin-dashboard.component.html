@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <!-- Left-aligned button -->
+    <div class="navbar-brand">
+      <button type="button" class="btn btn-lg btn-success" (click)="addNewUser()">Add New User</button>
+    </div>
+
+    <!-- Right-aligned button -->
+    <div class="navbar-brand ml-auto">
+      <button type="button" class="btn btn-lg btn-outline-danger" (click)="logout()">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-lg-12 col-md-8" *ngIf="userDetails$ | async as usersDetails ; else noUserDetails">
+            <h2 class="text-primary text-center mb-5">Admin Dashboard</h2>
+            <table class="table table-hover ">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col"> Delete </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of usersDetails ;let  i = index" >
+                    <!-- <th scope="row"></th> -->
+                    <td>{{i+1}}</td>
+                    <td>{{item.email}}</td>
+                     <ng-container *ngIf="item.isblock === true  ; else blockedFalse">
+                      <td><button  type="button" class="btn btn-sm btn-danger" (click)="blockUnblock(item._id)" >Block</button></td>
+                    </ng-container>
+                    <ng-template #blockedFalse>
+                    <td>  
+                       <button  type="button" class=" btn btn-sm btn-success"  (click)="blockUnblock(item._id)" >UnBlock</button>
+                    </td>          
+                    </ng-template>
+                    <td> 
+                      <button  type="button" class="btn btn-sm btn-outline-info" (click)="gotoEdit(item._id)">Edit</button>
+                    </td>
+                    <td>
+                      <button type="submit" class="btn btn-sm btn-outline-danger" (click)="deteteUser(item._id)">Delete</button>
+                    </td>
+                   
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <ng-template #noUserDetails>
+          <p>No user details available.</p>
+        </ng-template>
+    </div>
+</div>
+
+
